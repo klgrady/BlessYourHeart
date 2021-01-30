@@ -20,13 +20,13 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.green,
+        primarySwatch: Colors.grey,
         // This makes the visual density adapt to the platform that you run
         // the app on. For desktop platforms, the controls will be smaller and
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: "Bless/Curse"),
+      home: MyHomePage(title: "Bless Your Heart"),
     );
   }
 }
@@ -61,15 +61,14 @@ class _MyHomePageState extends State<MyHomePage> {
       // called again, and so nothing would appear to happen.
       _karma *= -1;
     });
-    print(_karma);
   }
 
   String getBlessing() {
     if (_karma == 1) {
-      return "Today's Blessing: ";
+      return "Oh, bless your heart!";
     }
 
-    return "Today's Curse: ";
+    return "Well. Bless your heart.";
   }
 
   String getGreeting() {
@@ -88,10 +87,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return Icons.arrow_circle_up_rounded;
   }
 
+  MaterialColor getIconColor() {
+    if (_karma == 1) {
+      return Colors.red;
+    }
+
+    return Colors.green;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
+    // by the _switchState method above.
     //
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
@@ -134,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _switchState,
-        child: Icon(getIcon()),
+        child: Icon(getIcon(), color: getIconColor()),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
